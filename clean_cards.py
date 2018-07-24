@@ -5,7 +5,7 @@ import re
 
 
 def clean_data(df):
-    unused_columns = ['artist', 'cardId', 'cardSet', 'collectible', 'dbfId', 'locale', 'flavor', 'howToGet', 'howToGetGold', 'img', 'imgGold', 'multiClassGroup', 'elite', 'classes', 'faction']
+    unused_columns = ['artist', 'cardId', 'cardSet', 'collectible', 'dbfId', 'locale', 'flavor', 'howToGet', 'howToGetGold', 'img', 'imgGold', 'multiClassGroup', 'elite', 'classes', 'faction', 'armor', 'durability']
     df = df.drop(unused_columns, axis=1)
     df = df[df['type'] == 'Minion']
     df['text'] = df['text'].astype(str)
@@ -23,14 +23,14 @@ def transform_mechanics(x):
 def filter_text(x):
     # Removes html tags </> from card text and square brackets []
     remove_x = re.compile(r'\[x\]')
-    remove_brackets = re.compile(r'<.*?>')
+    remove_tags = re.compile(r'<.*?>')
     x = remove_x.sub('', x)
-    x = remove_brackets.sub('', x)
+    x = remove_tags.sub('', x)
     x = x.strip()
     x = x.replace('\\n', ' ')
     return x
 
-def main(filename):
+def main(filename, output_file):
     # Please use the provided cards.json file as the argument
     data = pd.read_json(filename, lines=True)
 
@@ -41,13 +41,10 @@ def main(filename):
     # Filter out unneeded text 
     data['text'] = data['text'].apply(filter_text)
 
-    # We may not need mechanics (remove?)
-    # Try creating normal distribution and sampling from it to create new cards
-    # Try using simple reccurence neural network to generate cards
+    data['text'] = data['text'].replace('nan', np.NaN)
+    data = data.dropna()
 
-
-    print(data)
-
+    data.to_json(output_file, orient="records", lines=True)
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2])
