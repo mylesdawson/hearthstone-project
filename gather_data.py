@@ -1,26 +1,33 @@
 import requests
 import json
+import sys
 
-# Not well documented api....fkin hell
-valid_sets = ['The Grand Tournament', 'Goblins vs Gnomes', 'Blackrock Mountain', 'The League of Explorers', 'Whispers of the Old Gods', 'Kobolds & Catacombs', 'The Witchwood', "Journey to Un'Goro", 'Mean Streets of Gadgetzan', 'Naxxramas', 'One Night in Karazhan', 'Goblins vs Gnomes', 'Basic', 'Classic', 'Knights of the Frozen Throne',  ]
 
-headers = { 'X-Mashape-Key': 'P5bBTHueMlmshzOOP2U2DwwtvJRgp1zrMbfjsnORZtXnhg0I8P' }
-r = requests.get('https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1', headers=headers)
+def main(api_key):
+    # Not well documented api....fkin hell
+    valid_sets = ['The Grand Tournament', 'Goblins vs Gnomes', 'Blackrock Mountain', 'The League of Explorers', 'Whispers of the Old Gods', 'Kobolds & Catacombs', 'The Witchwood', "Journey to Un'Goro", 'Mean Streets of Gadgetzan', 'Naxxramas', 'One Night in Karazhan', 'Goblins vs Gnomes', 'Basic', 'Classic', 'Knights of the Frozen Throne',  ]
 
-r = json.loads(r.text)
+    headers = { 'X-Mashape-Key': api_key }
+    r = requests.get('https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1', headers=headers)
 
-# Discarding useless info like missions, credits and debug cards
-data = {}
-for key, value in r.items():
-    if key in valid_sets:
-        data[key] = value
+    r = json.loads(r.text)
 
-cards = open('cards.json', 'w')
+    # Discarding useless info like missions, credits and debug cards
+    data = {}
+    for key, value in r.items():
+        if key in valid_sets:
+            data[key] = value
 
-# Writing to json file in lines format
-for key, value in r.items():
-    for item in r[key]:
-        json.dump(item, cards)
-        cards.write('\n')
+    cards = open('cards.json', 'w')
 
-cards.close()
+    # Writing to json file in lines format
+    for key, value in r.items():
+        for item in r[key]:
+            json.dump(item, cards)
+            cards.write('\n')
+
+    cards.close()
+
+
+if __name__ == "__main__":
+    main(sys.argv[1])
