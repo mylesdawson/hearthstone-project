@@ -4,11 +4,7 @@ Python 3.5
 
 ## Packages (pip3):
 
-numpy
-pandas
-requests
-textgenrnn
-tensorflow
+See requirements.txt. Use pip3 to install.
 
 ## How To Run
 
