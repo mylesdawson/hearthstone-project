@@ -2,4 +2,4 @@ venv/
 __pycache__
 textgenrnn_weights.hdf5
 generated_cards.txt
-
+new_model_weights.hdf5
