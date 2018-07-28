@@ -16,6 +16,7 @@ def filter_text(x):
     x = remove_tags.sub('', x)
     x = x.strip()
     x = x.replace('\\n', ' ')
+    x = x.replace('nan', '')
     return x
 
 def main(filename, card_text_file):
@@ -25,7 +26,7 @@ def main(filename, card_text_file):
     data = clean_data(data)
     data['text'] = data['text'].apply(filter_text)
 
-    data.to_csv(card_text_file, header=None, index=None, sep=' ')
+    data.to_csv(card_text_file, header=None, index=None, sep=' ', float_format='%.f')
 
 
 if __name__ == '__main__':

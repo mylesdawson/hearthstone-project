@@ -14,5 +14,5 @@ All the necessary data files have been gathered and cleaned. It is recommended t
 
 2. Run `python3 clean_cards.py cards.json <output_file.txt>`. cards.json is the input and the other file is the output of the cleaned data (in .txt format). card_texts.txt contains the cleaned output.
 
-3. Generate new minion cards by using [Max Woolf's RNN Text Generator](https://github.com/minimaxir/textgenrnn): `python3 textgen.py card_texts.txt`. This will create 3 txt files (after some time) that contain generated cards at different temperatures. Temperatures closer to 1 have more freedom in creating wild output combinations. By default `num_epochs=10`. This will go over the dataset 10 times to enforce the training and increase accuracy of output. num_epochs is set to a large number due to the small size of the cards dataset. To see some results without having to wait long set `num_epochs=1`.
+3. Generate new minion cards by using [Max Woolf's RNN Text Generator](https://github.com/minimaxir/textgenrnn): `python3 textgen.py card_texts.txt`. This will create 3 txt files (after some time) that contain generated cards at different temperatures. Temperatures closer to 1 have more freedom in creating wild output combinations. To see some results without having to wait long set `num_epochs=1` or view the provided generated_output.txt files.
 
