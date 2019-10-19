@@ -16,4 +16,4 @@ All the necessary data files have been gathered and cleaned. It is recommended t
 
 3. Generate new minion cards by using [Max Woolf's RNN Text Generator](https://github.com/minimaxir/textgenrnn): `python3 textgen.py card_texts.txt`. This will create 3 .txt files (after some time) that contain generated cards at different temperatures. Temperatures closer to 1 have more freedom in creating wild output combinations. To see some results without having to wait long set `num_epochs=1` or view the provided generated_output.txt files. Running this will also create a model_weights.hdf5 file. This file is used to reuse the model without retraining (see step 4)
 
-4. Reuse model by running `python3 textgen_from_weights.py new_model_weights.hdf5 <n_samples> <temperature>`. Doing so will quickly generate n samples at specified temperature. I would not recommend going above 1 temperature.
+4. Reuse model by running `python3 textgen_from_weights.py new_model_weights.hdf5 <n_samples> <temperature>`. Performing this step will quickly generate n samples at specified temperature. Going above temperature 1 is not recommended.
