@@ -8,7 +8,7 @@ See requirements.txt. Use pip3 to install.
 
 ## How To Run
 
-All the necessary data files have been gathered and cleaned. It is recommended to skip the first step as it requires creating an account and generating an API key:
+All the necessary data files have been gathered and cleaned. The first step below should be skipped because this step requires creating an account and generating an API key.
 
 1. To Run `python3 gather_data.py` you must first create an account here: [mashape-hearthstone-api](https://market.mashape.com/omgvamp/hearthstone) and generate an API key. This key can be used as an input argument to `gather_data.py`. The cards have already been gathered (see cards.json file) and useless ones have been discarded.
 
